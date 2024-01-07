@@ -1,0 +1,24 @@
+<h1>Tic-Tac-Toe</h1>
+<h1>
+    <% if @win.nil? %>
+        <%= "#{@current_player_name} 's turn" %>
+    <% end %>
+</h1>
+<h2><%= @win%> </h2>
+<table>
+  <% @board.each_with_index do |row, i| %>
+    <tr>
+      <% row.each_with_index do |cell, j| %>
+        <%= form_tag({ action: 'make_move', i: i, j: j },remote: true, method: :post) do %>
+            <%= submit_tag(cell || " ") %>
+        <% end %>
+      <% end %>
+    </tr>
+    <br/>
+  <% end %>
+</table>
+
+<br/>
+<%= form_tag({ action: 'reset_game' }, method: :post) do %>
+  <%= submit_tag('Reset Game') %>
+<% end %>
